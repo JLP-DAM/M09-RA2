@@ -3,9 +3,9 @@ public class PrincipalsIguals {
         Fil pepe = new Fil("Pepe", Thread.MAX_PRIORITY);
         Fil juan = new Fil("Juan", Thread.MAX_PRIORITY);
 
-        pepe.thread.start();
+        pepe.start();
 
-        juan.thread.start();
+        juan.start();
 
         System.out.println("Acaba thread main");
     }

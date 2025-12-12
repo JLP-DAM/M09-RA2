@@ -1,14 +1,10 @@
 public class PrincipalEstricte {
-    public static void main(String[] args) {
-        Fil pepe = new Fil("Pepe", Thread.MAX_PRIORITY);
-        Fil juan = new Fil("Juan", Thread.MIN_PRIORITY);
+    public static void main(String[] args) throws Exception {
+        Fil pepe = new Fil("Pepe", Thread.MAX_PRIORITY, true);
+        Fil juan = new Fil("Juan", Thread.MAX_PRIORITY, true);
 
-        pepe.thread.start();
-        juan.thread.start();
-
-        while (pepe.thread.isAlive() && juan.thread.isAlive()) {
-            
-        }
+        pepe.start();
+        juan.start();
 
         System.out.println("Acaba thread main");
     }

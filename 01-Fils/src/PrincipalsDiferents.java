@@ -3,8 +3,8 @@ public class PrincipalsDiferents {
         Fil pepe = new Fil("Pepe", Thread.MAX_PRIORITY);
         Fil juan = new Fil("Juan", Thread.MIN_PRIORITY);
 
-        pepe.thread.start();
-        juan.thread.start();
+        pepe.start();
+        juan.start();
 
         System.out.println("Acaba thread main");
     }
