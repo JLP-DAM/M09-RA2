@@ -29,7 +29,7 @@ public class Coet extends Thread {
 
                 int canvi = (motor.potencia == potencia ? 0 : motor.potencia > potencia ? -1 : 1);
 
-                motor.setPotencia(motor.potencia + canvi);
+                motor.setPotencia(potencia);
 
                 potenciaArribada = potenciaArribada && ((motor.potencia + canvi) == potencia);
             }
