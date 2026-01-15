@@ -21,6 +21,8 @@ public class Treballador extends Thread {
 
         this.cobrat = 0.0f;
 
+        this.rnd = new Random();
+
         this.setName(nom);
     }
 
@@ -36,6 +38,10 @@ public class Treballador extends Thread {
 
             edat_actual++;
         }
+
+        try {
+            Thread.sleep(rnd.nextInt(1, 2));
+        } catch(Exception exception) {}
     }
 
     public void cobra() {
