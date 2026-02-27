@@ -3,8 +3,17 @@ public class Forquilla {
     private int index;
     private int propietari = LLIURE;
 
-    synchronized public void agafa() {
-        
+    synchronized public void agafa(Filosof filosof) {
+        while (propietari != -1) {
+            try {
+                wait();
+            } catch (Exception exception) {
+            }
+        }
+
+        this.propietari = filosof.getIndex();
+
+        notifyAll();
     }
 
     public Forquilla(int index) {

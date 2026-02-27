@@ -33,6 +33,8 @@ public class Filosof extends Thread {
             return;
         }
 
+        forquillaEsquerra.agafa(this);
+
         print("agafa la forquilla esquerra " + forquillaEsquerra.getIndex());
     }
 
@@ -45,6 +47,8 @@ public class Filosof extends Thread {
             espera(random.nextLong(500, 1000));
             return;
         }
+        
+        forquillaDreta.agafa(this);
 
         print("agafa la forquilla dreta " + forquillaDreta.getIndex());
     }
@@ -55,8 +59,13 @@ public class Filosof extends Thread {
     }
 
     private void deixarForquilles() {
-        agafarForquillaEsquerra();
-        agafarForquillaDreta();
+        if (forquillaDreta.getPropietari() == index) {
+            forquillaEsquerra.setPropietari(-1);
+        }
+        
+        if (forquillaDreta.getPropietari() == index) {
+            forquillaDreta.setPropietari(-1);
+        }
     }
 
     public void menjar() {
@@ -115,7 +124,7 @@ public class Filosof extends Thread {
     }
 
 
-    public int setIndex() {
+    public int getIndex() {
         return index;
     }
 
