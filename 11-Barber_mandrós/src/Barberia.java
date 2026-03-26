@@ -1,11 +1,11 @@
 import java.util.LinkedList;
 
-public class Barberia {
+public class Barberia extends Thread {
     private static Barberia barberia = null;
     
     private LinkedList<Client> salaEspera;
 
-    private Barber condBarber;
+    private Object condBarber;
 
     private int quantitatCadires;
 
@@ -13,6 +13,8 @@ public class Barberia {
         quantitatCadires = cadires;
 
         salaEspera = new LinkedList<Client>();
+
+        condBarber = new Object();
     }
 
     public static Barberia getInstancia() {
@@ -35,11 +37,11 @@ public class Barberia {
         return salaEspera;
     }
 
-    public Barber getCondBarber() {
+    public Object getCondBarber() {
         return condBarber;
     }
 
-    public void setCondBarber(Barber condBarber) {
+    public void setCondBarber(Object condBarber) {
         this.condBarber = condBarber;
     }
 
@@ -56,6 +58,33 @@ public class Barberia {
             return;
         }
 
+        salaEspera.add(client);
         System.out.println("Client " + client.getNom() + " en espera.");
+    }
+
+    public static void main(String[] args) {
+        barberia = Barberia.getInstancia(3);
+
+        Barber barber = new Barber("Pepe");
+
+        barber.start();
+
+        for (int index = 1; index <= 20; index++) {
+            try {
+                Thread.sleep(500);
+            } catch (Exception exception) {}
+            
+            Barberia.getInstancia().entraClient(new Client(index));;    
+
+            synchronized (Barberia.getInstancia().condBarber) {
+                Barberia.getInstancia().condBarber.notify();
+            }
+
+            if (index == 10) {
+                try {
+                    Thread.sleep(10000);
+                } catch (Exception exception) {}
+            }
+        }
     }
 }
